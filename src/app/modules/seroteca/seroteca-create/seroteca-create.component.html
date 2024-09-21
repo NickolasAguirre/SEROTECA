@@ -1,8 +1,9 @@
 <div *ngIf="limits$ | async as limit">
-  <ul>
-    <li *ngFor="let n of [].constructor(columnCount); let i = index">
-      Elemento {{ i + 1 }}
-      <!-- Esto mostrará 1, 2, ..., columnCount -->
-    </li>
+  <ul class="">
+    @for (item of [].constructor(limit.columnas); track $index) {
+    <br />
+    @for (item of [].constructor(limit.filas); track $index) {
+    <i class="pi pi-circle m-1 text-6xl"></i>
+    } }
   </ul>
 </div>

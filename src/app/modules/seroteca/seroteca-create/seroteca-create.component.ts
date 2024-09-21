@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SerotecaCreateComponent implements OnInit {
   constructor(private _portamuestraService: PortamuestraService) {}
-  columnCount = 0;
   ngOnInit(): void {
     this.getLimits();
   }
@@ -22,12 +21,5 @@ export class SerotecaCreateComponent implements OnInit {
   public limits$!: Observable<PortaMuestra>;
   getLimits() {
     this.limits$ = this._portamuestraService.GetLimitPortaMuestra();
-    this.limits$.subscribe((data: PortaMuestra) => {
-      debugger;
-      console.log(data);
-      console.log(data.columnas);
-      console.log(data.filas);
-      this.columnCount = data.columnas; // Asigna el número de columnas
-    });
   }
 }
