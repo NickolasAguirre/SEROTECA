@@ -1,0 +1,33 @@
+<ng-container *ngIf="dataOrden$ | async as dataOrden">
+  <p-table [value]="dataOrden" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Número</th>
+        <th>IdPortaMuestra</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+      <tr>
+        <td>{{ order.numero }}</td>
+        <td>{{ order.idPortaMuestra }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+
+<div *ngIf="limits$ | async as limit">
+  <ul class="">
+    @for (item of [].constructor(limit.columnas); track $index) { @for (item of
+    [].constructor(limit.filas); track $index) {
+
+    <button class="circle cursor-pointer"></button>
+
+    }
+    <br />}
+  </ul>
+  <label for="numero">numero: </label>
+
+  <button type="submit" (click)="postOrdenPortaMuestra()">GUARDAR</button>
+  <label for="name">Name: </label>
+  <input pInputText id="name" type="text" [formControl]="numero" />
+</div>

@@ -1,0 +1,6 @@
+.circle {
+  width: 4rem;
+  height: 4rem;
+  background-color: white;
+  border-radius: 50%; /* Hace que el div sea un círculo */
+}
