@@ -1,33 +1,55 @@
-<ng-container *ngIf="dataOrden$ | async as dataOrden">
-  <p-table [value]="dataOrden" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Número</th>
-        <th>IdPortaMuestra</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-order>
-      <tr>
-        <td>{{ order.numero }}</td>
-        <td>{{ order.idPortaMuestra }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</ng-container>
-
-<div *ngIf="limits$ | async as limit">
-  <ul class="">
-    @for (item of [].constructor(limit.columnas); track $index) { @for (item of
-    [].constructor(limit.filas); track $index) {
-
-    <button class="circle cursor-pointer"></button>
-
-    }
-    <br />}
-  </ul>
-  <label for="numero">numero: </label>
-
-  <button type="submit" (click)="postOrdenPortaMuestra()">GUARDAR</button>
-  <label for="name">Name: </label>
-  <input pInputText id="name" type="text" [formControl]="numero" />
+<div class="flex m-2">
+  <div>
+    <h1>Listado de ordenes</h1>
+    <ng-container *ngIf="dataOrden$ | async as dataOrden">
+      <p-table
+        [value]="dataOrden"
+        [tableStyle]="{ width: '10rem' }"
+        styleClass="p-datatable-gridlines"
+        selectionMode="multiple"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Número</th>
+            <th>IdPortaMuestra</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr>
+            <td (click)="find(order.numero)">{{ order.numero }}</td>
+            <td>{{ order.idPortaMuestra }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
+  </div>
+  <div *ngIf="ubication$ | async as ubication">
+    <div *ngIf="limits$ | async as limit">
+      <ul>
+        <ng-container
+          *ngFor="let item of [].constructor(limit.columnas); let i = index"
+        >
+          <ng-container
+            *ngFor="let item2 of [].constructor(limit.filas); let j = index"
+          >
+            <ng-container
+              *ngIf="ubication.columna === i && ubication.fila === j"
+            >
+              <h1>hola</h1>
+              <!-- Ejemplo de contenido si se cumple la condición -->
+              <button
+                class="circle cursor-pointer"
+                [ngClass]="{
+                  'red-background':
+                    ubication.columna === i && ubication.fila === j
+                }"
+              ></button>
+            </ng-container>
+            <br />
+            <!-- Esto es opcional, según la estructura que quieras lograr -->
+          </ng-container>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
 </div>

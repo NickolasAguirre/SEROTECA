@@ -1,7 +1,10 @@
 import { OrdenportamuestraService } from './../../services/ordenportamuestra.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PortaMuestra } from '../../modules/seroteca/models/portaMuesta';
+import {
+  IOrdenPortaMuestra,
+  PortaMuestra,
+} from '../../modules/seroteca/models/portaMuesta';
 import { Observable, startWith } from 'rxjs';
 import { PortamuestraService } from '../../services/portamuestra.service';
 import { InputTextModule } from 'primeng/inputtext';
@@ -46,6 +49,8 @@ export class PortamuestraComponent implements OnInit {
 
   public limits$!: Observable<PortaMuestra>;
   public dataOrden$!: Observable<any[]>;
+  public ubication$!: Observable<IOrdenPortaMuestra>;
+  numeroOrden = 0;
 
   getLimits() {
     this.limits$ = this._portamuestraService.GetLimitPortaMuestra();
@@ -58,8 +63,12 @@ export class PortamuestraComponent implements OnInit {
   }
 
   getAllOrders() {
-    debugger;
     this.dataOrden$ = this._ordenPortaMuestraService.getAllOrdenPortaMuestra();
     // .pipe(startWith([]));
+  }
+
+  find(data: number) {
+    debugger;
+    this.ubication$ = this._ordenPortaMuestraService.find(data);
   }
 }
